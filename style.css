@@ -1,156 +1,152 @@
-body {
-    background-color: #ffffff;
-    padding: 0;
-    margin: 0;
-}
-
-.top {
-    background-color: #71B7B4;
-    padding: 53px 132px 26px 132px;
-}
-
-h1 {
-    color: #FFFFFF;
-    font-family: 'Lato', sans-serif;
-    font-size: 64px;
-    font-weight: 700;
-    text-align: center;
-}
-
-h2 {
-    color: #2B2B2B;
-}
-
-p {
-    color: #EEEEEE;
-    font-family: 'Lato', sans-serif;
-    font-weight: 400;
-    line-height: 24px;
-}
-
-hr {
-    color: #4D5057;
-}
-
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:700");
-
-* {
-  box-sizing: border-box;
+body
+{
   margin: 0;
   padding: 0;
+  
+  /* make it look decent enough */
+  background: #232323;
+  color: #cdcdcd;
+  font-family: "Avenir Next", "Avenir", sans-serif;
 }
 
-/* by default include the background of the option for the home navigation */
-body {
-  background: #5b37b7;
-  color: #010101;
-  /* center in the viewport */
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  font-family: "Open Sans", sans-serif;
-  /* transition for the change in bg color */
-  transition: background 0.2s ease-out;
-}
-
-/* display the anchor link side by side  */
-nav {
-  display: flex;
-  background: #fff;
-  /* considerable whitespace surrounding the navigation's items */
-  padding: 2rem 3.15rem;
-  border-radius: 0 0 30px 30px;
-  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* remove default style and slightly separate the anchor links from one another */
-a {
-  color: inherit;
-  text-decoration: none;
-  margin: 0 0.2rem;
-  /* display the svg icon and span elements side by side, vertically aligned */
-  display: flex;
-  align-items: center;
-  /* include padding for the background applied on the active item */
-  padding: 0.75rem 1.25rem;
-  border-radius: 30px;
-  /* position relative for the pseudo element */
+#menuToggle
+{
+  display: block;
   position: relative;
-  /* custom properties for the colors picked up by the elements when clicked (and updated for each link in the script) */
-  --hover-bg: #5b37b720;
-  --hover-c: #5b37b7;
+  top: 50px;
+  left: 50px;
+  
+  z-index: 1;
+  
+  -webkit-user-select: none;
+  user-select: none;
 }
 
-/* include considerable negative margin to have the svg icon overlapping with the span element */
-a svg {
-  margin-right: -2.5rem;
-  width: 28px;
-  height: 28px;
-  pointer-events: none;
-  /* transition for the change in margin */
-  transition: margin 0.2s ease-out;
+#menuToggle a
+{
+  text-decoration: none;
+  color: #232323;
+  
+  transition: color 0.3s ease;
 }
-/* by default hide the span element */
-a span {
-  opacity: 0;
-  visibility: hidden;
-  font-size: 0.9rem;
-  margin-left: 0.9rem;
+
+#menuToggle a:hover
+{
+  color: tomato;
 }
-/* include with a pseudo element relative to the anchor link a circle, with a fixed with and height */
-a:before {
+
+
+#menuToggle input
+{
+  display: block;
+  width: 40px;
+  height: 32px;
   position: absolute;
-  content: "";
-  top: 50%;
-  left: 0;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  /* positioned to the left of the anchor link and scaled to 0 */
-  transform: translate(0%, -50%) scale(0);
-  visibility: visible;
-  opacity: 1;
-}
-/* when active */
-/* specify the colors dictated by the custom properties */
-a.active {
-  background: var(--hover-bg);
-  color: var(--hover-c);
-}
-/* using the color specified by the then updated custom property show the circle of the pseudo element increasing its size and highlighting it momentarily */
-a.active:before {
-  background: var(--hover-c);
-  opacity: 0;
-  visibility: hidden;
-  transform: translate(0%, -50%) scale(2);
-  /* transition only when the class is applied */
-  transition: all 0.4s ease-out;
-}
-/* remove the margin applied to the svg to make it overlay atop the anchor link */
-a.active svg {
-  margin-right: 0;
-}
-/* show the span element */
-a.active span {
-  visibility: visible;
-  opacity: 1;
-  transition: all 0.2s ease-out;
+  top: -7px;
+  left: -5px;
+  
+  cursor: pointer;
+  
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+  
+  -webkit-touch-callout: none;
 }
 
-/* on smaller viewports show the navigation bar on the side, attached to the left of the screen */
-@media (max-width: 500px) {
-  nav {
-    flex-direction: column;
-    justify-self: start;
-    border-radius: 0 30px 30px 0;
-    padding: 2rem 1.15rem 2rem 0.75rem;
-  }
-  /* change the margin separating the anchor link elements now dividing the elements vertically */
-  nav a {
-    margin: 0.5rem 0;
-  }
-  /* remove the negative margin from the svg elements, as the width is to be taken in full */
-  nav svg {
-    margin: 0;
-  }
+/*
+ * Just a quick hamburger
+ */
+#menuToggle span
+{
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  
+  background: #cdcdcd;
+  border-radius: 3px;
+  
+  z-index: 1;
+  
+  transform-origin: 4px 0px;
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+
+/* 
+ * Transform all the slices of hamburger
+ * into a crossmark.
+ */
+#menuToggle input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #232323;
+}
+
+/*
+ * But let's hide the middle one.
+ */
+#menuToggle input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+ * Ohyeah and the last one should go the other direction
+ */
+#menuToggle input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu
+{
+  position: absolute;
+  width: 300px;
+  margin: -100px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+  
+  background: #ededed;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+  
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li
+{
+  padding: 10px 0;
+  font-size: 22px;
+}
+
+/*
+ * And let's slide it in from the left
+ */
+#menuToggle input:checked ~ ul
+{
+  transform: none;
 }
